@@ -11,3 +11,4 @@ tmp/
 *.tfstate.*
 .terraform.tfstate.lock.info
 crash.log
+tfplan
