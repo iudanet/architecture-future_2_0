@@ -12,3 +12,7 @@ tmp/
 .terraform.tfstate.lock.info
 crash.log
 tfplan
+
+# techradar
+node_modules/
+Task3/techradar/build/

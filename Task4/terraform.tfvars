@@ -3,7 +3,7 @@ zone         = "ru-central1-a"
 app_zone     = "ru-central1-d"
 public_cidr  = "10.20.1.0/24"
 private_cidr = "10.20.2.0/24"
-admin_cidrs  = ["0.0.0.0/0"] # в проде — адреса офиса / VPN
+admin_cidrs  = ["203.0.113.10/32"] # адрес рабочего места администратора / VPN
 
 image_family = "ubuntu-2204-lts"
 platform_id  = "standard-v3"

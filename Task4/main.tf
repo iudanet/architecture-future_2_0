@@ -6,6 +6,18 @@ terraform {
       version = "~> 0.140"
     }
   }
+
+  # В проде state хранится в Object Storage (бакет создаётся вручную):
+  # backend "s3" {
+  #   endpoints = { s3 = "https://storage.yandexcloud.net" }
+  #   bucket    = "future20-tfstate"
+  #   key       = "domain-env/terraform.tfstate"
+  #   region    = "ru-central1"
+  #   skip_region_validation      = true
+  #   skip_credentials_validation = true
+  #   skip_requesting_account_id  = true
+  #   skip_s3_checksum            = true
+  # }
 }
 
 # Токен, облако и каталог берутся из окружения: YC_TOKEN, YC_CLOUD_ID, YC_FOLDER_ID.
@@ -98,7 +110,7 @@ resource "yandex_vpc_security_group" "app" {
     description    = "HTTPS inside VPC"
     protocol       = "TCP"
     port           = 443
-    v4_cidr_blocks = [var.public_cidr, var.private_cidr]
+    v4_cidr_blocks = [var.private_cidr]
   }
 
   egress {
@@ -110,11 +122,12 @@ resource "yandex_vpc_security_group" "app" {
 
 # ---------- Виртуальные машины и диски ----------
 resource "yandex_compute_instance" "bastion" {
-  name        = "${var.prefix}-bastion"
-  hostname    = "${var.prefix}-bastion"
-  platform_id = var.platform_id
-  zone        = var.zone
-  labels      = local.labels
+  name                      = "${var.prefix}-bastion"
+  hostname                  = "${var.prefix}-bastion"
+  platform_id               = var.platform_id
+  zone                      = var.zone
+  labels                    = local.labels
+  allow_stopping_for_update = true
 
   resources {
     cores         = var.bastion.cores
@@ -140,6 +153,11 @@ resource "yandex_compute_instance" "bastion" {
     security_group_ids = [yandex_vpc_security_group.bastion.id]
   }
 
+  # Новый образ семейства не должен пересоздавать работающие ВМ.
+  lifecycle {
+    ignore_changes = [boot_disk[0].initialize_params[0].image_id]
+  }
+
   metadata = {
     ssh-keys = local.ssh_metadata
   }
@@ -154,11 +172,12 @@ resource "yandex_compute_disk" "data" {
 }
 
 resource "yandex_compute_instance" "app" {
-  name        = "${var.prefix}-app"
-  hostname    = "${var.prefix}-app"
-  platform_id = var.platform_id
-  zone        = var.app_zone
-  labels      = local.labels
+  name                      = "${var.prefix}-app"
+  hostname                  = "${var.prefix}-app"
+  platform_id               = var.platform_id
+  zone                      = var.app_zone
+  labels                    = local.labels
+  allow_stopping_for_update = true
 
   resources {
     cores         = var.app.cores
@@ -188,6 +207,11 @@ resource "yandex_compute_instance" "app" {
     subnet_id          = yandex_vpc_subnet.private.id
     nat                = false
     security_group_ids = [yandex_vpc_security_group.app.id]
+  }
+
+  # Новый образ семейства не должен пересоздавать работающие ВМ.
+  lifecycle {
+    ignore_changes = [boot_disk[0].initialize_params[0].image_id]
   }
 
   metadata = {

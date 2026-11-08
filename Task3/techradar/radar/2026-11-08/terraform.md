@@ -1,8 +1,8 @@
 ---
 title: "Terraform (IaC)"
-ring: adopt
+ring: trial
 quadrant: tools
-tags: [cloud]
+tags: [proposed, cloud]
 ---
 
 Воспроизводимые среды доменов по шаблону. Сценарии: S4, S5.

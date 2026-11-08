@@ -1,8 +1,8 @@
 ---
 title: "Managed PostgreSQL"
-ring: adopt
+ring: trial
 quadrant: platforms-and-operations
-tags: [data]
+tags: [proposed, data]
 ---
 
 Операционные БД доменов в облаке: кластеры в 3 зонах, резервное копирование. Сценарии: S2, S5.

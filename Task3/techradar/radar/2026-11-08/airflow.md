@@ -1,8 +1,8 @@
 ---
 title: "Apache Airflow"
-ring: adopt
+ring: trial
 quadrant: tools
-tags: [data]
+tags: [proposed, data]
 ---
 
 Оркестрация загрузок и трансформаций Data Products. Сценарий: S1.

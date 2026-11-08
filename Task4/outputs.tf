@@ -16,6 +16,11 @@ output "nat_gateway_id" {
   value       = yandex_vpc_gateway.nat.id
 }
 
+output "data_disk_id" {
+  description = "ID диска данных (для снапшотов и переноса)"
+  value       = yandex_compute_disk.data.id
+}
+
 output "bastion_public_ip" {
   description = "Публичный IP bastion"
   value       = yandex_compute_instance.bastion.network_interface[0].nat_ip_address

@@ -2,7 +2,7 @@
 title: "Nessie"
 ring: trial
 quadrant: tools
-tags: [data]
+tags: [proposed, data]
 ---
 
 Каталог таблиц Iceberg с версионированием (ветки данных). Сценарий: S1.

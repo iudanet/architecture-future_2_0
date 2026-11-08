@@ -74,7 +74,7 @@
       },
       {
         "id": "hold",
-        "title": "Выкидываем",
+        "title": "Выводим",
         "description": "",
         "color": "#d62828",
         "radius": 1,

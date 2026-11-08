@@ -2,7 +2,7 @@
 title: "Yandex DataSphere"
 ring: assess
 quadrant: platforms-and-operations
-tags: [ai]
+tags: [proposed, ai]
 ---
 
-Среда обучения моделей на обезличенных датасетах. Сценарий: S3.
+Управляемая среда обучения моделей на обезличенных датасетах; сейчас обучение — на Python в домене ИИ. Сценарий: S3.

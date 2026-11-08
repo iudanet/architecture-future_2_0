@@ -2,7 +2,7 @@
 title: "Бизнес-логика в DWH"
 ring: hold
 quadrant: methods-and-patterns
-tags: [legacy]
+tags: [current, legacy]
 ---
 
 Каждое новое направление требует доработки центрального хранилища. Логика переносится в домены. Сценарии: S2, S4.
