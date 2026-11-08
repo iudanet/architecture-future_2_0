@@ -1,0 +1,13 @@
+# материалы курса и временные файлы
+tmp/
+
+# служебные файлы
+*.swp
+.DS_Store
+
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+crash.log
